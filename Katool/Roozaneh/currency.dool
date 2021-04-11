@@ -1,0 +1,2 @@
+torsocks wget -O dbonbast.html bonbast.com
+wget -O TGJU TGJU.ORG
