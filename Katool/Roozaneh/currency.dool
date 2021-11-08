@@ -1,6 +1,0 @@
-#! /bin/bash
-
-cd /home/c/code/Moozmar/Katool/Roozaneh/
-printf -v NOW '%(%F_%H:%M:%S)T' -1
-wget -O $NOW+tgju.org.html tgju.org
-torsocks wget -O $NOW+bonbast.html bonbast.com
