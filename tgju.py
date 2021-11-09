@@ -1,11 +1,11 @@
-from Javab import *
 from Price import *
-from anbar import getAnbar, exec, mySQLize,getSymID,getDicID,begir,bezar
-from Address import *
-from noche import execSysCmd, sexyError, berin,ffloat
-from netnoche import getHTML
 import json
+
 from DegbanStatic import *
+from Price import *
+from anbar import getAnbar, getSymID, getDicID, bezar
+from netnoche import getHTML
+from noche import sexyError, ffloat
 
 
 class TGJuPrice(Price):
@@ -31,8 +31,7 @@ class TGJuPrice(Price):
             setJensID(getSymID(self.jens,conn))
     def setJensID(jensID):
             self.jensID = jensID
-    def getDic(self):
-            return vars(self)
+
     def sabt(self):
             bezar('price','absVal,jensID,refCurID,timestamp','{},{},{},"{}"'.format(self.value,self.jensID,self.refCurID,self.vaght),self.conn)
 
@@ -58,12 +57,16 @@ def getLatestPrice():
     return priceArray
 
 
-
-def main():
-    p=getLatestPrice()
+def updatePricesTGJU():
+    p = getLatestPrice()
     for pp in p:
         print(pp.getDic())
         pp.sabt()
+        print(pp.begoo())
+
+def main():
+    updatePricesTGJU():
+
 
 
 if __name__== '__main__':
