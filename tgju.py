@@ -1,6 +1,6 @@
-from Price import *
-import json
 
+import json
+from Price import *
 from DegbanStatic import *
 from Price import *
 from anbar import getAnbar, getSymID, getDicID, bezar
@@ -65,7 +65,7 @@ def updatePricesTGJU():
         print(pp.begoo())
 
 def main():
-    updatePricesTGJU():
+    updatePricesTGJU()
 
 
 
