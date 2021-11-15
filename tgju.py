@@ -1,11 +1,13 @@
+from StaticsBase import unIn
+
 
 import json
 from Price import *
 from DegbanStatic import *
 from Price import *
-from anbar import getAnbar, getSymID, getDicID, bezar
+from anbar import *
 from netnoche import getHTML
-from noche import sexyError, ffloat
+from Khadang import sexyError, ffloat
 
 
 class TGJuPrice(Price):
@@ -22,13 +24,14 @@ class TGJuPrice(Price):
         self.refCurrency,self.refCurID = self.dic[jens]
         self.dic=''
         self.conn = conn
-        if self.conn == 'NO':
-            conn = getAnbar(base0LAN)
+        if self.conn ==unIn:
+            conn = Anbar(base0LAN)
         self.jensID = jensID
         if jensID == 0:
-            self.jensID = getSymID(self.jens, conn)
+            self.jensID = self.conn.getSymID(self.jens, self.conn)
+
     def setJensID():
-            setJensID(getSymID(self.jens,conn))
+            self.jensID = self.conn.getSymID(self.jens, self.conn)
     def setJensID(jensID):
             self.jensID = jensID
 
@@ -46,7 +49,7 @@ def getLatestPrice():
             prices[jens]=ffloat(jjj[jens]['p'])
     except Exception as e:
         sexyError(e)
-    conn=getAnbar(base0LAN)
+    conn=Anbar(base0LAN)
     priceArray=[]
     for p in prices:
         id,eq=getDicID(p, conn)
