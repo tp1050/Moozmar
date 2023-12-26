@@ -1,0 +1,6 @@
+.history
+.pyc
+.html
+html
+*.html
+__pycache__
