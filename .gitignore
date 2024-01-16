@@ -3,4 +3,13 @@
 .html
 html
 *.html
+*.json
+*.vcf
+*.csv
 __pycache__
+*.doc 
+*.docx
+*.txt 
+*.jpg
+*.png
+*.pdf 

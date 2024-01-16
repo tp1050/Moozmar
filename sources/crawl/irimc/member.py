@@ -110,10 +110,21 @@ html="""
 
 """
 
-
+dr={
+    'title':'دکتر',
+    'firstname': '',
+    'lastname': '',
+    'nezam': '',
+    'specializations': '',
+    'img':[],
+    'addresses': [],
+    'phones': [],
+}
 from bs4 import BeautifulSoup as BS4 
 from pathlib import Path
+from Moozmar.lib.capitals import SPLIT
 html=Path('assets/2.html').read_text()
+
 
 soup=BS4(html,features="lxml")
 tds=soup.find_all('td')
@@ -122,13 +133,24 @@ details=soup.select_one(selector='.u_name').text
 if details:
     name, specialization, nezam=details.strip().split('\n')
     name=name.replace('دکتر','').strip()
-    city=tds[5].h6.text.strip()
-    address=tds[5].small.text.strip()
-    phone=tds[7].h6.text.strip()
+    dr['firstname']=name
     nezam=nezam.split(':')[1].strip()
+    dr['nezam']=nezam
     
 details2=soup.select_one("table.m-b-0.table-hover").tbody.find_all('tr')
+if details:
+    for tr in details2:
+        tds=tr.find_all('td')
+        # specialization=tds[1].h6.text.strip()
+        city=tds[1].small.text.strip()
+        address=tds[1].h6.text.strip()
+        dr['addresses'].append((city,address))
+        phone=SPLIT(tds[3].h6.text.strip(),'-')
+        dr['phones'].extend(phone)
+        # print(name,'\n', specialization,'\n', nezam, '\n',address,'\n', phone ,'\n', city)
+
 # tds=details2.find_all('td')
-
-
-print(name,'\n', specialization,'\n', nezam, '\n',address,'\n', phone ,'\n', city)
+dr['specializations']=soup.select_one("body > section:nth-child(5) > div > div > div:nth-child(2) > div.col-sm-12.col-md-12.col-lg-4 > div:nth-child(1) > div > div > div.col-12.col-xl-8 > h4").text.strip()
+dr['img']="https://membersearch.irimc.org"+soup.body.select_one(".user_pic.rounded.img-raised")['src']
+from pprint import pprint
+pprint(dr)
